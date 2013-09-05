@@ -18,6 +18,9 @@
     <!-- GWT needs at least java 1.5 -->
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Current Sencha GXT version -->
+    <gxt.version>3.0.6</gxt.version>
   </properties>
 
   <dependencies>
@@ -51,6 +54,17 @@
       <version>1.0.0.GA</version>
       <classifier>sources</classifier>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-gwt</artifactId>
+      <version>${googleGuava.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sencha.gxt</groupId>
+      <artifactId>gxt</artifactId>
+      <version>${gxt.version}</version>
     </dependency>
   </dependencies>
 
@@ -164,5 +178,12 @@
     	</plugins>
     </pluginManagement>
   </build>
+  <repositories>
+    <repository>
+      <id>sencha-support-commercial-release</id>
+      <name>Commercially licensed Sencha artifacts</name>
+      <url>https://maven.sencha.com/repo/support-commercial-release</url>
+    </repository>
+  </repositories>
 
 </project>
