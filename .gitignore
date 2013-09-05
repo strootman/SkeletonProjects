@@ -4,3 +4,13 @@
 *.jar
 *.war
 *.ear
+/target
+
+# Eclipse Files #
+.settings
+
+# GWT #
+gwt-unitCache
+src/main/webapp/Skeleton
+src/main/webapp/WEB-INF/deploy
+com.gwt.skeleton.SkeletonJUnit
