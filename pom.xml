@@ -21,6 +21,7 @@
 
     <!-- Current Sencha GXT version -->
     <gxt.version>3.0.6</gxt.version>
+    <googleGuava.version>13.0.1</googleGuava.version>
   </properties>
 
   <dependencies>
