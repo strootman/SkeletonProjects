@@ -94,7 +94,8 @@
           gwt-maven-plugin documentation at codehaus.org -->
         <configuration>
           <runTarget>Skeleton.html</runTarget>
-          <hostedWebapp>${webappDirectory}</hostedWebapp>
+          <!-- <hostedWebapp>${webappDirectory}</hostedWebapp> -->
+          <webappDirectory>${basedir}/war</webappDirectory>
           <i18nMessagesBundle>com.gwt.skeleton.client.Messages</i18nMessagesBundle>
         </configuration>
       </plugin>
@@ -113,7 +114,8 @@
           </execution>
         </executions>
         <configuration>
-          <webappDirectory>${webappDirectory}</webappDirectory>
+          <webappDirectory>${basedir}/war</webappDirectory>
+<!--           <webappDirectory>${webappDirectory}</webappDirectory> -->
         </configuration>
       </plugin>
       <plugin>
@@ -181,7 +183,7 @@
   </build>
   <repositories>
     <repository>
-      <id>sencha-support-commercial-release</id>
+      <id>sencha-commercial-release</id>
       <name>Commercially licensed Sencha artifacts</name>
       <url>https://maven.sencha.com/repo/support-commercial-release</url>
     </repository>
