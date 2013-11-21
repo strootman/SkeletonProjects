@@ -2,6 +2,12 @@
 <module rename-to='Skeleton'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User' />
+  
+  
+  <inherits name='com.sencha.gxt.ui.GXT' />
+  <inherits name='com.sencha.gxt.theme.gray.Gray'/>
+  
+  <inherits name='com.google.web.bindery.requestfactory.RequestFactory'/>
 
   <!-- We need the JUnit module in the main module,               -->
   <!-- otherwise eclipse complains (Google plugin bug?)           -->
@@ -10,17 +16,23 @@
   <!-- Inherit the default GWT style sheet.  You can change       -->
   <!-- the theme of your GWT application by uncommenting          -->
   <!-- any one of the following lines.                            -->
-  <inherits name='com.google.gwt.user.theme.standard.Standard' />
+  <!-- <inherits name='com.google.gwt.user.theme.standard.Standard' /> -->
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
 
   <!-- Other module inherits                                      -->
+  <inherits name="com.google.common.collect.Collect"/>
+  
+  <!-- UIBinder -->
+  <inherits name="com.google.web.bindery.autobean.AutoBean"/>
+  <inherits name="com.google.gwt.uibinder.UiBinder" />
+  
+  
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.gwt.skeleton.client.Skeleton' />
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />
-  <source path='shared' />
 
 </module>

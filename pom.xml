@@ -16,7 +16,8 @@
     <!-- Convenience property to set the GWT version -->
     <gwtVersion>2.5.1</gwtVersion>
     <!-- GWT needs at least java 1.5 -->
-    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+    <webappDirectory>${basedir}/war</webappDirectory>
+<!--     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory> -->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -52,11 +53,24 @@
       <classifier>sources</classifier>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.0.0.GA</version>
+      <classifier>sources</classifier>
+    </dependency>
     
     <dependency>
       <groupId>com.sencha.gxt</groupId>
       <artifactId>gxt</artifactId>
       <version>3.0.6</version>
+    </dependency>
+    
+    
+    <dependency>
+       <groupId>com.google.guava</groupId>
+       <artifactId>guava-gwt</artifactId>
+       <version>13.0.1</version>
     </dependency>
   </dependencies>
 
@@ -76,8 +90,6 @@
             <goals>
               <goal>compile</goal>
               <goal>test</goal>
-              <goal>i18n</goal>
-              <goal>generateAsync</goal>
             </goals>
           </execution>
         </executions>
@@ -86,7 +98,6 @@
         <configuration>
           <runTarget>Skeleton.html</runTarget>
           <hostedWebapp>${webappDirectory}</hostedWebapp>
-          <i18nMessagesBundle>com.gwt.skeleton.client.Messages</i18nMessagesBundle>
         </configuration>
       </plugin>
 
@@ -112,8 +123,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.6</source>
+          <target>1.6</target>
         </configuration>
       </plugin>
     </plugins>
