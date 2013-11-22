@@ -18,4 +18,28 @@ public interface SearchFilter {
     DateInterval getModifiedWithin();
 
     void setModifiedWithin(DateInterval modifiedWithin);
+
+    String getCreatedBy();
+
+    void setCreatedBy(String createdBy);
+
+    String getSharedWith();
+
+    void setSharedWith();
+
+    String getMetadataQuery();
+
+    void setMetadataQuery(String metadataQuery);
+
+    String getNegatedMetadataQuery();
+
+    void setNegatedMetadataQuery(String negatedMetadataQuery);
+
+    String getFileQuery();
+
+    void setFileQuery(String fileQuery);
+
+    String getNegatedFileQuery();
+
+    void setNegatedFileQuery(String negatedFileQuery);
 }

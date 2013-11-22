@@ -5,21 +5,37 @@
 	         xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container" 
 	         xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form" 
 	         xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
+	
+	<ui:with field="margins0500"
+			 type="com.sencha.gxt.core.client.util.Margins">
+		<ui:attributes top="0" right="5" bottom="0" left="0" />
+	</ui:with>
+	<ui:with field="margins5000"
+			 type="com.sencha.gxt.core.client.util.Margins">
+		<ui:attributes top="15" right="0" bottom="0" left="0" />
+	</ui:with>
+	<ui:with field="margins0050"
+			 type="com.sencha.gxt.core.client.util.Margins">
+		<ui:attributes top="0" right="0" bottom="15" left="0" />
+	</ui:with>
+	<ui:with field="padding5"
+			 type="com.sencha.gxt.core.client.util.Padding">
+		<ui:attributes top="5" right="5" bottom="5" left="5" />
+	</ui:with>
 
 	<ui:with field="verticalLayoutData"
 			 type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData">
 		<ui:attributes width="1" height="-1" />
 	</ui:with>
 	
-	<ui:with field="otherverticalLayoutData"
-			 type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData">
-		<ui:attributes width="1" height="30" />
-	</ui:with>
-	
-	<ui:with field="margins0500"
-			 type="com.sencha.gxt.core.client.util.Margins">
-		<ui:attributes top="0" right="5" bottom="0" left="0" />
-	</ui:with>
+	<ui:with field="verticalLayoutDataWithTopMargins"
+             type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData">
+        <ui:attributes width="1" height="-1" margins="{margins5000}"/>
+    </ui:with>
+	<ui:with field="verticalLayoutDataWithBottomMargins"
+             type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData">
+        <ui:attributes width="1" height="-1" margins="{margins0050}"/>
+    </ui:with>
 
 
 	<ui:with field="boxLayoutDataMargins0500"
@@ -31,10 +47,6 @@
 		<ui:attributes margins="{margins0500}" flex="1" />
 	</ui:with>
 
-	<ui:with field="padding5"
-			 type="com.sencha.gxt.core.client.util.Padding">
-		<ui:attributes top="5" right="5" bottom="5" left="5" />
-	</ui:with>
 
 	<container:VerticalLayoutContainer>
 
@@ -59,10 +71,14 @@
 		</container:child>
 
 		
-		<container:child layoutData="{verticalLayoutData}">
+		<container:child layoutData="{verticalLayoutDataWithTopMargins}">
 					<form:FieldLabel text="Created within">
 						<form:widget>
-							<container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
+							<form:SimpleComboBox ui:field="createdWithinCombo" 
+										   forceSelection="true" 
+										   triggerAction="ALL"
+										   width="75"/>
+							<!-- <container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
 								<container:child layoutData="{boxLayoutDataMargins0500}">
 									<form:SimpleComboBox ui:field="createdWithinCombo" 
 												   forceSelection="true" 
@@ -82,15 +98,19 @@
 									<form:DateField ui:field="createdWithin" 
 													emptyText="Select date..." />
 								</container:child>
-							</container:HBoxLayoutContainer>
+							</container:HBoxLayoutContainer> -->
 						</form:widget>
 					</form:FieldLabel>
 		</container:child>
 		
-		<container:child layoutData="{verticalLayoutData}">
+		<container:child layoutData="{verticalLayoutDataWithBottomMargins}">
 					<form:FieldLabel text="Modified within">
 						<form:widget>
-							<container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
+							<form:SimpleComboBox ui:field="modifiedWithinCombo" 
+										   forceSelection="true" 
+										   triggerAction="ALL" 
+										   width="75"/>
+							<!-- <container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
 								<container:child layoutData="{boxLayoutDataMargins0500}">
 									<form:SimpleComboBox ui:field="modifiedWithinCombo" 
 												   forceSelection="true" 
@@ -110,7 +130,7 @@
 									<form:DateField ui:field="modifiedWithin" 
 													emptyText="Select date..." />
 								</container:child>
-							</container:HBoxLayoutContainer>
+							</container:HBoxLayoutContainer> -->
 						</form:widget>
 					</form:FieldLabel>
 		</container:child>
@@ -158,73 +178,63 @@
 		</container:child>
 		
 
-		<container:child layoutData="{otherverticalLayoutData}">
-					<form:FieldLabel text="File size is bigger than">
-						<form:widget>
-							<container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:NumberField ui:field="fileSizeGreaterThan"/>
-								</container:child>
-
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:SimpleComboBox ui:field="greaterThanComboBox"
-														 width="50"
-														 triggerAction="ALL"
-														 forceSelection="true"/>
-								</container:child>
-							</container:HBoxLayoutContainer>
-						</form:widget>
-					</form:FieldLabel>
-		</container:child>
-
-		<container:child layoutData="{otherverticalLayoutData}">
-					<form:FieldLabel text="File size is smaller than">
-						<form:widget>
-							<container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:NumberField ui:field="fileSizeLessThan"/>
-								</container:child>
-
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:SimpleComboBox ui:field="lessThanComboBox"
-														 width="50"
-														 triggerAction="ALL"
-														 forceSelection="true"/>
-								</container:child>
-							</container:HBoxLayoutContainer>
-						</form:widget>
-					</form:FieldLabel>
-		</container:child>
-<!-- 		<container:child layoutData="{otherverticalLayoutData}">
-			<container:HorizontalLayoutContainer>
-				<container:child>
-					<form:FieldLabel text="File size is bigger than">
-						<form:widget>
+		<container:child layoutData="{verticalLayoutData}">
+			<form:FieldLabel text="File size is bigger than">
+				<form:widget>
+					<container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
+						<container:child layoutData="{boxLayoutDataMargins0500}">
 							<form:NumberField ui:field="fileSizeGreaterThan"/>
-						</form:widget>
-					</form:FieldLabel>
-				</container:child>
-				<container:child>
-					<form:SimpleComboBox ui:field="greaterThanComboBox"
-										 width="50"/>
-				</container:child>
-			</container:HorizontalLayoutContainer>
-		</container:child> -->
-<!-- 		<container:child layoutData="{otherverticalLayoutData}">
-			<container:HorizontalLayoutContainer>
-				<container:child>
-					<form:FieldLabel text="File size is smaller than">
-						<form:widget>
+						</container:child>
+	
+						<container:child layoutData="{boxLayoutDataMargins0500}">
+							<form:SimpleComboBox ui:field="greaterThanComboBox"
+												 width="50"
+												 triggerAction="ALL"
+												 forceSelection="true"/>
+						</container:child>
+					</container:HBoxLayoutContainer>
+				</form:widget>
+			</form:FieldLabel>
+		</container:child>
+
+		<container:child layoutData="{verticalLayoutData}">
+			<form:FieldLabel text="File size is smaller than">
+				<form:widget>
+					<container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
+						<container:child layoutData="{boxLayoutDataMargins0500}">
 							<form:NumberField ui:field="fileSizeLessThan"/>
-						</form:widget>
-					</form:FieldLabel>
-				</container:child>
-				<container:child>
-					<form:SimpleComboBox ui:field="lessThanComboBox"
-										 width="100"/>
-				</container:child>
-			</container:HorizontalLayoutContainer>
-		</container:child> -->
+						</container:child>
+	
+						<container:child layoutData="{boxLayoutDataMargins0500}">
+							<form:SimpleComboBox ui:field="lessThanComboBox"
+												 width="50"
+												 triggerAction="ALL"
+												 forceSelection="true"/>
+						</container:child>
+					</container:HBoxLayoutContainer>
+				</form:widget>
+			</form:FieldLabel>
+		</container:child>
+		
+		
+		<container:child layoutData="{verticalLayoutData}">
+		  <container:HBoxLayoutContainer hBoxLayoutAlign="TOP" pack="END">
+	          <container:child layoutData="{boxLayoutDataMargins0500}">
+	              <button:TextButton ui:field="searchButton"
+	                                 text="Search"/>
+	          </container:child>
+          </container:HBoxLayoutContainer>
+		</container:child>
+		
+		
+		<container:child layoutData="{verticalLayoutData}">
+		  <container:HBoxLayoutContainer hBoxLayoutAlign="TOP" pack="END">
+	          <container:child layoutData="{boxLayoutDataMargins0500}">
+	               <g:Hyperlink text="Create filter with this search..."/>
+	          </container:child>
+          </container:HBoxLayoutContainer>
+		</container:child>
+		
 	</container:VerticalLayoutContainer>
 
 

@@ -4,12 +4,13 @@ import com.google.common.collect.Lists;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.uibinder.client.UiTemplate;
 import com.google.gwt.user.client.ui.Widget;
 
 import com.sencha.gxt.data.shared.StringLabelProvider;
 import com.sencha.gxt.widget.core.client.Composite;
-import com.sencha.gxt.widget.core.client.form.DateField;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.SimpleComboBox;
@@ -33,14 +34,14 @@ public class SearchFormViewImpl extends Composite implements SearchFormView {
     @UiField(provided = true)
     SimpleComboBox<String> createdWithinCombo;
 
-    @UiField
-    DateField createdWithin;
+    // @UiField
+    // DateField createdWithin;
 
     @UiField(provided = true)
     SimpleComboBox<String> modifiedWithinCombo;
 
-    @UiField
-    DateField modifiedWithin;
+    // @UiField
+    // DateField modifiedWithin;
     
     @UiField
     TextField metadata;
@@ -68,6 +69,11 @@ public class SearchFormViewImpl extends Composite implements SearchFormView {
 
     private final List<String> fileSizeUnits = Lists.newArrayList("KB", "MB");
     private final List<String> timeIntervals = Lists.newArrayList("1 day", "3 days", "1 week", "2 weeks", "1 month", "2 months", "6 months", "1 year");
+
+    @UiHandler("searchButton")
+    void onSearchBtnSelected(SelectEvent event) {
+
+    }
 
     public SearchFormViewImpl() {
         initProvidedUiFields();
