@@ -3,6 +3,7 @@ package com.gwt.skeleton.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
+import com.gwt.skeleton.client.service.SearchServiceFacade;
 import com.gwt.skeleton.client.view.SearchFormViewImpl;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.button.TextButton;
@@ -28,7 +29,8 @@ public void onModuleLoad() {
                 dlg.setHeadingText("Sample");
                 dlg.setAutoHide(false);
                 dlg.setSize("400", "800");
-                dlg.add(new SearchFormViewImpl());
+                SearchServiceFacade searchService = null;
+                dlg.add(new SearchFormViewImpl(searchService));
                 dlg.show();
 
             }

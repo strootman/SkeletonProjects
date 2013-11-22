@@ -4,7 +4,8 @@
 	         xmlns:c="urn:import:com.sencha.gxt.widget.core.client" 
 	         xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container" 
 	         xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form" 
-	         xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
+	         xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
+	         xmlns:widgets="urn:import:org.iplantc.core.uicommons.client.widgets">
 	
 	<ui:with field="margins0500"
 			 type="com.sencha.gxt.core.client.util.Margins">
@@ -54,7 +55,7 @@
 			<form:FieldLabel text="Filename has the words"
 							 labelAlign="TOP">
 				<form:widget>
-					<form:TextField ui:field="fileName" 
+					<form:TextField ui:field="fileQuery" 
 									allowBlank="false"
 						            emptyText="Enter values..." />
 				</form:widget>
@@ -65,7 +66,7 @@
 			<form:FieldLabel text="Filename doesn't have"
 							 labelAlign="TOP">
 				<form:widget>
-					<form:TextField ui:field="fileNameNegated"/>
+					<form:TextField ui:field="negatedFileQuery"/>
 				</form:widget>
 			</form:FieldLabel>
 		</container:child>
@@ -78,27 +79,6 @@
 										   forceSelection="true" 
 										   triggerAction="ALL"
 										   width="75"/>
-							<!-- <container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:SimpleComboBox ui:field="createdWithinCombo" 
-												   forceSelection="true" 
-												   triggerAction="ALL"
-												   width="75"/>
-								</container:child>
-								
-								<container:child layoutData="{boxLayoutDataMargins0500Flex1}">
-									<g:Label />
-								</container:child>
-								
-								<container:child layoutData="{boxLayoutDataMargins0500Flex1}">
-									<g:Label text="of"/>
-								</container:child>
-								
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:DateField ui:field="createdWithin" 
-													emptyText="Select date..." />
-								</container:child>
-							</container:HBoxLayoutContainer> -->
 						</form:widget>
 					</form:FieldLabel>
 		</container:child>
@@ -110,27 +90,6 @@
 										   forceSelection="true" 
 										   triggerAction="ALL" 
 										   width="75"/>
-							<!-- <container:HBoxLayoutContainer padding="{padding5}" hBoxLayoutAlign="TOP">
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:SimpleComboBox ui:field="modifiedWithinCombo" 
-												   forceSelection="true" 
-												   triggerAction="ALL" 
-												   width="75"/>
-								</container:child>
-								
-								<container:child layoutData="{boxLayoutDataMargins0500Flex1}">
-									<g:Label />
-								</container:child>
-								
-								<container:child layoutData="{boxLayoutDataMargins0500Flex1}">
-									<g:Label text="of"/>
-								</container:child>
-								
-								<container:child layoutData="{boxLayoutDataMargins0500}">
-									<form:DateField ui:field="modifiedWithin" 
-													emptyText="Select date..." />
-								</container:child>
-							</container:HBoxLayoutContainer> -->
 						</form:widget>
 					</form:FieldLabel>
 		</container:child>
@@ -140,7 +99,7 @@
 			<form:FieldLabel text="Metadata has the words"
 							 labelAlign="TOP">
 				<form:widget>
-					<form:TextField ui:field="metadata"
+					<form:TextField ui:field="metadataQuery"
 					                emptyText="Enter keyword(s) separated by commas"/>
 				</form:widget>
 			</form:FieldLabel>
@@ -151,7 +110,7 @@
 			<form:FieldLabel text="Metadata doesn't have"
 							 labelAlign="TOP">
 				<form:widget>
-					<form:TextField ui:field="metadataNegated"
+					<form:TextField ui:field="negatedMetadataQuery"
 					               emptyText="Enter keyword(s) separated by commas"/>
 				</form:widget>
 			</form:FieldLabel>
@@ -230,11 +189,11 @@
 		<container:child layoutData="{verticalLayoutData}">
 		  <container:HBoxLayoutContainer hBoxLayoutAlign="TOP" pack="END">
 	          <container:child layoutData="{boxLayoutDataMargins0500}">
-	               <g:Hyperlink text="Create filter with this search..."/>
+	               <widgets:IPlantAnchor ui:field="createFilterLink" />
 	          </container:child>
           </container:HBoxLayoutContainer>
 		</container:child>
-		
+
 	</container:VerticalLayoutContainer>
 
 
