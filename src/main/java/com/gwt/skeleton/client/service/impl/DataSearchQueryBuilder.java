@@ -6,6 +6,11 @@ import com.google.common.base.Splitter;
 import com.gwt.skeleton.client.view.model.DataSearchFilter;
 
 /**
+ * This class uses a builder pattern to construct a search query from a given filter.
+ * 
+ * If a field in the given filter is null or empty, the corresponding search term will be omitted from
+ * the final query.
+ * 
  * # Currently working on assumption that the full query can have a field term shown twice.
  * 
  * # Question for tony: What does the query string look like when designating multiple fields?
