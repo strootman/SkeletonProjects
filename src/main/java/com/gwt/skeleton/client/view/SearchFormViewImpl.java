@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.autobean.shared.AutoBean;
 
 import com.gwt.skeleton.client.service.SearchServiceFacade;
-import com.gwt.skeleton.client.service.impl.FilterToSearchQueryUtil;
+import com.gwt.skeleton.client.service.impl.DataSearchQueryBuilder;
 import com.gwt.skeleton.client.view.model.DataSearchFilter;
 import com.gwt.skeleton.client.view.model.SearchAutoBeanFactory;
 import com.sencha.gxt.data.shared.StringLabelProvider;
@@ -190,7 +190,8 @@ public class SearchFormViewImpl extends Composite implements Editor<DataSearchFi
         }
 
         // Transform into query
-        String query = FilterToSearchQueryUtil.generateQueryFrom(flushedFilter);
+        String query = new DataSearchQueryBuilder(flushedFilter).buildFullQuery();
+
         searchService.submitSearchFromFilter(flushedFilter, new AsyncCallback<String>() {
 
             @Override
