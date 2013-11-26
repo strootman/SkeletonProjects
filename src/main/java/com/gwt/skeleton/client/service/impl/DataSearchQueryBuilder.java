@@ -48,6 +48,11 @@ public class DataSearchQueryBuilder {
         return this;
     }
 
+    /**
+     * label:(some query)
+     * 
+     * @return
+     */
     public DataSearchQueryBuilder file() {
         String content = dsf.getFileQuery();
         sb.append(createQuery("label:", content));
@@ -67,6 +72,9 @@ public class DataSearchQueryBuilder {
         return toString();
     }
 
+    /**
+     * @return
+     */
     public DataSearchQueryBuilder metadata() {
         String content = dsf.getMetadataQuery();
         // Search metadata.attribute, metadata.value, and metadata.unit for the given query
@@ -80,6 +88,11 @@ public class DataSearchQueryBuilder {
         return this;
     }
 
+    /**
+     * label:(-some -query -fldjf)
+     * 
+     * @return
+     */
     public DataSearchQueryBuilder negatedFile() {
         // Split the query and reassemble with a "-" slapped onto the front.
         Iterable<String> split = Splitter.on(" ").split(dsf.getNegatedFileQuery());

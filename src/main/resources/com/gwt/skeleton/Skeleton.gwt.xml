@@ -31,6 +31,16 @@
          class="org.iplantc.core.uicommons.client.appearance.widgets.IPlantAnchorDefaultAppearance">
       <when-type-is class="org.iplantc.core.uicommons.client.widgets.IPlantAnchorAppearance"/>
    </replace-with>
+   
+   <replace-with class="com.gwt.skeleton.client.widget.IplantSearchCellDefaultAppearance">
+        <when-type-is class="com.gwt.skeleton.client.widget.IplantSearchCell.IplantSearchCellAppearance"/>
+   </replace-with>
+   
+   <replace-with class="com.gwt.skeleton.client.service.impl.SearchServiceFacadeImpl">
+        <when-type-is class="com.gwt.skeleton.client.service.SearchServiceFacade" />
+   </replace-with>
+        
+  <set-configuration-property name="CssResource.style" value="pretty"/>
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.gwt.skeleton.client.Skeleton' />

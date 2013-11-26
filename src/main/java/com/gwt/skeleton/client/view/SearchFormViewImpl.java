@@ -21,12 +21,12 @@ import com.gwt.skeleton.client.service.impl.DataSearchQueryBuilder;
 import com.gwt.skeleton.client.view.model.DataSearchFilter;
 import com.gwt.skeleton.client.view.model.SearchAutoBeanFactory;
 import com.sencha.gxt.data.shared.StringLabelProvider;
-import com.sencha.gxt.widget.core.client.Composite;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
 import com.sencha.gxt.widget.core.client.form.NumberField;
 import com.sencha.gxt.widget.core.client.form.NumberPropertyEditor;
 import com.sencha.gxt.widget.core.client.form.SimpleComboBox;
 import com.sencha.gxt.widget.core.client.form.TextField;
+import com.sencha.gxt.widget.core.client.menu.Menu;
 
 import org.iplantc.core.uicommons.client.widgets.IPlantAnchor;
 
@@ -37,10 +37,12 @@ import java.util.List;
  * will be used to update the form with the number of results for the current query. Will have to handle
  * ValueChanged events within the editor.
  * 
+ * TODO Search form should have the ability to be shown at a position relative to a given widget
+ * 
  * @author jstroot
  * 
  */
-public class SearchFormViewImpl extends Composite implements Editor<DataSearchFilter>, SearchFormView {
+public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>, SearchFormView {
 
     public final class CreateFilterClickHandler implements ClickHandler {
         private final EditorDriver<DataSearchFilter> editorDriver1;
@@ -165,7 +167,11 @@ public class SearchFormViewImpl extends Composite implements Editor<DataSearchFi
     public SearchFormViewImpl(final SearchServiceFacade searchService, final DataSearchFilter filter) {
         this.searchService = searchService;
         initProvidedUiFields();
-        initWidget(uiBinder.createAndBindUi(this));
+        setSize("400", "800");
+        add(uiBinder.createAndBindUi(this));
+        plain = true;
+        showSeparator = false;
+        setEnableScrolling(false);
         editorDriver.initialize(this);
     }
 
@@ -236,6 +242,12 @@ public class SearchFormViewImpl extends Composite implements Editor<DataSearchFi
         lessThanComboBox.add(fileSizeUnits);
         greaterThanComboBox.setValue(fileSizeUnits.get(0));
         lessThanComboBox.setValue(fileSizeUnits.get(0));
+    }
+
+    @Override
+    public void show() {
+        // TODO Auto-generated method stub
+        super.show();
     }
 
 }

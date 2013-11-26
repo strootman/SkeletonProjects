@@ -5,6 +5,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 
 import com.gwt.skeleton.client.service.SearchServiceFacade;
 import com.gwt.skeleton.client.view.SearchFormViewImpl;
+import com.gwt.skeleton.client.widget.IplantSearchField;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.button.TextButton;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
@@ -36,7 +37,9 @@ public void onModuleLoad() {
             }
         });
 
-        RootPanel.get("sendButtonContainer").add(launchSample);
+        // RootPanel.get("sendButtonContainer").add(launchSample);
 
+        IplantSearchField isf = new IplantSearchField();
+        RootPanel.get("sendButtonContainer").add(isf);
   }
 }

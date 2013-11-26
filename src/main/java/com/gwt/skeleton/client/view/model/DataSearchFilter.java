@@ -11,6 +11,11 @@ package com.gwt.skeleton.client.view.model;
  */
 public interface DataSearchFilter {
 
+    /**
+     * creator.username:(here is the content)
+     * 
+     * @return
+     */
     String getCreatedBy();
 
     DateInterval getCreatedWithin();
