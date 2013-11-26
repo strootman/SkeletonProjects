@@ -10,7 +10,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import com.gwt.skeleton.client.service.SearchServiceFacade;
-import com.gwt.skeleton.client.view.SearchFormViewImpl;
+import com.gwt.skeleton.client.view.DiskResourceQueryForm;
 import com.sencha.gxt.cell.core.client.form.DateCell;
 import com.sencha.gxt.cell.core.client.form.TriggerFieldCell;
 import com.sencha.gxt.core.client.GXT;
@@ -42,7 +42,7 @@ public class IplantSearchCell extends TriggerFieldCell<String> implements HasExp
     }
 
     private boolean expanded;
-    private SearchFormViewImpl searchForm;
+    private DiskResourceQueryForm searchForm;
 
     /**
      * Creates a new date cell.
@@ -139,9 +139,9 @@ public class IplantSearchCell extends TriggerFieldCell<String> implements HasExp
 
     }
 
-    public SearchFormViewImpl getSearchForm() {
+    public DiskResourceQueryForm getSearchForm() {
         if (searchForm == null) {
-            searchForm = new SearchFormViewImpl(GWT.<SearchServiceFacade> create(SearchServiceFacade.class));
+            searchForm = new DiskResourceQueryForm(GWT.<SearchServiceFacade> create(SearchServiceFacade.class));
             searchForm.addHideHandler(new HideHandler() {
 
                 @Override

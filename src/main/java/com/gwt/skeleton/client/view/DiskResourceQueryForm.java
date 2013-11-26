@@ -16,9 +16,11 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.web.bindery.autobean.shared.AutoBean;
 
+import com.gwt.skeleton.client.events.SaveDiskResourceQueryEvent;
+import com.gwt.skeleton.client.events.SubmitDiskResourceQueryEvent;
 import com.gwt.skeleton.client.service.SearchServiceFacade;
 import com.gwt.skeleton.client.service.impl.DataSearchQueryBuilder;
-import com.gwt.skeleton.client.view.model.DataSearchFilter;
+import com.gwt.skeleton.client.view.model.DiskResourceQueryTemplate;
 import com.gwt.skeleton.client.view.model.SearchAutoBeanFactory;
 import com.sencha.gxt.data.shared.StringLabelProvider;
 import com.sencha.gxt.widget.core.client.event.SelectEvent;
@@ -39,16 +41,17 @@ import java.util.List;
  * 
  * TODO Search form should have the ability to be shown at a position relative to a given widget
  * 
+ * 
  * @author jstroot
  * 
  */
-public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>, SearchFormView {
+public class DiskResourceQueryForm extends Menu implements Editor<DiskResourceQueryTemplate> {
 
     public final class CreateFilterClickHandler implements ClickHandler {
-        private final EditorDriver<DataSearchFilter> editorDriver1;
+        private final EditorDriver<DiskResourceQueryTemplate> editorDriver1;
         private final SearchServiceFacade searchService1;
 
-        public CreateFilterClickHandler(SearchServiceFacade searchService, EditorDriver<DataSearchFilter> editorDriver) {
+        public CreateFilterClickHandler(SearchServiceFacade searchService, EditorDriver<DiskResourceQueryTemplate> editorDriver) {
             this.searchService1 = searchService;
             this.editorDriver1 = editorDriver;
         }
@@ -56,7 +59,7 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
         @Override
         public void onClick(ClickEvent event) {
             // Flush filter to perform local validations
-            DataSearchFilter filterToSave = editorDriver1.flush();
+            DiskResourceQueryTemplate filterToSave = editorDriver1.flush();
             if (editorDriver1.hasErrors()) {
                 return;
             }
@@ -65,6 +68,7 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
                 @Override
                 public void onFailure(Throwable caught) {
                     // TODO Auto-generated method stub
+
 
                 }
 
@@ -79,16 +83,16 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
         }
     }
 
-    interface SearchFormEditorDriver extends SimpleBeanEditorDriver<DataSearchFilter, SearchFormViewImpl> {}
+    interface SearchFormEditorDriver extends SimpleBeanEditorDriver<DiskResourceQueryTemplate, DiskResourceQueryForm> {}
 
-    @UiTemplate("SearchForm.ui.xml")
-    interface SearchFormUiBinder extends UiBinder<Widget, SearchFormViewImpl> {}
+    @UiTemplate("DiskResourceQueryForm.ui.xml")
+    interface DiskResourceQueryFormUiBinder extends UiBinder<Widget, DiskResourceQueryForm> {}
 
-    private static SearchFormUiBinder uiBinder = GWT.create(SearchFormUiBinder.class);
+    private static DiskResourceQueryFormUiBinder uiBinder = GWT.create(DiskResourceQueryFormUiBinder.class);
 
-    private static DataSearchFilter createDefaultFilter() {
+    private static DiskResourceQueryTemplate createDefaultFilter() {
         SearchAutoBeanFactory factory = SearchAutoBeanFactory.INSTANCE;
-        AutoBean<DataSearchFilter> dataSearchFilter = factory.dataSearchFilter();
+        AutoBean<DiskResourceQueryTemplate> dataSearchFilter = factory.dataSearchFilter();
         dataSearchFilter.as().setCreatedWithin(factory.dateInterval().as());
         dataSearchFilter.as().setModifiedWithin(factory.dateInterval().as());
         dataSearchFilter.as().setFileSizeRange(factory.fileSizeRange().as());
@@ -140,6 +144,9 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
     @UiField 
     TextField sharedWith;
 
+    @UiField
+    IPlantAnchor createFilterLink;
+
     private final SearchFormEditorDriver editorDriver = GWT.create(SearchFormEditorDriver.class);
 
     private final List<String> fileSizeUnits = Lists.newArrayList("KB", "MB");
@@ -154,7 +161,7 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
      * 
      * @param searchService
      */
-    public SearchFormViewImpl(final SearchServiceFacade searchService) {
+    public DiskResourceQueryForm(final SearchServiceFacade searchService) {
         this(searchService, createDefaultFilter());
     }
 
@@ -164,60 +171,49 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
      * @param searchService
      * @param filter
      */
-    public SearchFormViewImpl(final SearchServiceFacade searchService, final DataSearchFilter filter) {
+    public DiskResourceQueryForm(final SearchServiceFacade searchService, final DiskResourceQueryTemplate filter) {
+        super(new DiskResourceQueryFormMenuAppearance());
         this.searchService = searchService;
         initProvidedUiFields();
         setSize("400", "800");
-        add(uiBinder.createAndBindUi(this));
+        Widget createAndBindUi = uiBinder.createAndBindUi(this);
+        add(createAndBindUi);
         plain = true;
         showSeparator = false;
         setEnableScrolling(false);
         editorDriver.initialize(this);
+        editorDriver.edit(filter);
     }
 
     @UiFactory
     IPlantAnchor createAnchor() {
         IPlantAnchor anchor = new IPlantAnchor("Create filter with this search...", -1, new CreateFilterClickHandler(searchService, editorDriver));
-
         return anchor;
     }
 
     @UiHandler("searchButton")
     void onSearchBtnSelected(@SuppressWarnings("unused") SelectEvent event) {
-        /*
-         * # Validate filter locally
-         * # Transform into query
-         * # submit search
-         */
         // Flush to perform local validations
-        DataSearchFilter flushedFilter = editorDriver.flush();
+        DiskResourceQueryTemplate flushedQueryTemplate = editorDriver.flush();
         if (editorDriver.hasErrors()) {
             return;
         }
+        // Fire event and pass flushed query
+        fireEvent(new SubmitDiskResourceQueryEvent(flushedQueryTemplate));
 
         // Transform into query
-        String query = new DataSearchQueryBuilder(flushedFilter).buildFullQuery();
+        String query = new DataSearchQueryBuilder(flushedQueryTemplate).buildFullQuery();
+    }
 
-        searchService.submitSearchFromFilter(flushedFilter, new AsyncCallback<String>() {
-
-            @Override
-            public void onSuccess(String result) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onFailure(Throwable caught) {
-                // TODO Auto-generated method stub
-
-            }
-
-        });
-
-        /*
-         * When I click this button,
-         * I expect the results of the search to appear in the Data window.
-         */
+    @UiHandler("createFilterLink")
+    void onCreateQueryTemplateClicked(ClickEvent event) {
+        // Flush to perform local validations
+        DiskResourceQueryTemplate flushedQueryTemplate = editorDriver.flush();
+        if (editorDriver.hasErrors()) {
+            return;
+        }
+        // Fire event and pass flushed query
+        fireEvent(new SaveDiskResourceQueryEvent(flushedQueryTemplate));
     }
 
     private void initProvidedUiFields() {
@@ -227,8 +223,8 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
         modifiedWithinCombo = new SimpleComboBox<String>(stringLabelProvider);
         createdWithinCombo.add(timeIntervals);
         modifiedWithinCombo.add(timeIntervals);
-        createdWithinCombo.setValue(timeIntervals.get(1));
-        modifiedWithinCombo.setValue(timeIntervals.get(1));
+        createdWithinCombo.setValue(timeIntervals.get(0));
+        modifiedWithinCombo.setValue(timeIntervals.get(0));
         
         // File Size Number fields
         NumberPropertyEditor.DoublePropertyEditor doublePropertyEditor = new NumberPropertyEditor.DoublePropertyEditor();
@@ -245,9 +241,9 @@ public class SearchFormViewImpl extends Menu implements Editor<DataSearchFilter>
     }
 
     @Override
-    public void show() {
-        // TODO Auto-generated method stub
-        super.show();
+    public void focus() {
+        super.focus();
+        getChildren().get(0).getElement().focus();
     }
 
 }

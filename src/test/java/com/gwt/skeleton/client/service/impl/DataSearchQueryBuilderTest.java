@@ -1,6 +1,6 @@
 package com.gwt.skeleton.client.service.impl;
 
-import com.gwt.skeleton.client.view.model.DataSearchFilter;
+import com.gwt.skeleton.client.view.model.DiskResourceQueryTemplate;
 import com.gwt.skeleton.client.view.model.DateInterval;
 import com.gwt.skeleton.client.view.model.FileSizeRange;
 
@@ -24,7 +24,7 @@ public class DataSearchQueryBuilderTest {
     @Test
     public void testBuildQuery() {
         String expected = "";
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         // TODO Set up mocked returns
         
@@ -38,7 +38,7 @@ public class DataSearchQueryBuilderTest {
     public void testCreatedBy() {
         String expected = "";
         String mockedReturnVal = "";
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getCreatedBy()).thenReturn(mockedReturnVal);
 
@@ -54,7 +54,7 @@ public class DataSearchQueryBuilderTest {
         DateInterval di = mock(DateInterval.class);
         when(di.getFrom()).thenReturn(new Date());
         when(di.getTo()).thenReturn(new Date());
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getCreatedWithin()).thenReturn(di);
 
@@ -68,7 +68,7 @@ public class DataSearchQueryBuilderTest {
     public void testFile() {
         String expected = "";
         String mockedReturnVal = "";
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getFileQuery()).thenReturn(mockedReturnVal);
 
@@ -84,7 +84,7 @@ public class DataSearchQueryBuilderTest {
         FileSizeRange fsr = mock(FileSizeRange.class);
         when(fsr.getMin()).thenReturn(0.0);
         when(fsr.getMax()).thenReturn(0.0);
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getFileSizeRange()).thenReturn(fsr);
 
@@ -98,7 +98,7 @@ public class DataSearchQueryBuilderTest {
     public void testMetadata() {
         String expected = "";
         String mockedReturnVal = "";
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getMetadataQuery()).thenReturn(mockedReturnVal);
 
@@ -114,7 +114,7 @@ public class DataSearchQueryBuilderTest {
         DateInterval di = mock(DateInterval.class);
         when(di.getFrom()).thenReturn(new Date());
         when(di.getTo()).thenReturn(new Date());
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getModifiedWithin()).thenReturn(di);
 
@@ -128,7 +128,7 @@ public class DataSearchQueryBuilderTest {
     public void testNegatedFile() {
         String expected = "";
         String mockedReturnVal = "";
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getNegatedFileQuery()).thenReturn(mockedReturnVal);
 
@@ -142,7 +142,7 @@ public class DataSearchQueryBuilderTest {
     public void testNegatedMetadata() {
         String expected = "";
         String mockedReturnVal = "";
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getNegatedMetadataQuery()).thenReturn(mockedReturnVal);
 
@@ -156,7 +156,7 @@ public class DataSearchQueryBuilderTest {
     public void testSharedWith() {
         String expected = "";
         String mockedReturnVal = "";
-        DataSearchFilter dsf = mock(DataSearchFilter.class);
+        DiskResourceQueryTemplate dsf = mock(DiskResourceQueryTemplate.class);
 
         when(dsf.getSharedWith()).thenReturn(mockedReturnVal);
 

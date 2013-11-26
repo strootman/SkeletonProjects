@@ -8,7 +8,7 @@ public interface SearchAutoBeanFactory extends AutoBeanFactory {
 
     public static final SearchAutoBeanFactory INSTANCE = GWT.create(SearchAutoBeanFactory.class);
 
-    AutoBean<DataSearchFilter> dataSearchFilter();
+    AutoBean<DiskResourceQueryTemplate> dataSearchFilter();
 
     AutoBean<DateInterval> dateInterval();
 

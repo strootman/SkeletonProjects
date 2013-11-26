@@ -9,7 +9,7 @@ package com.gwt.skeleton.client.view.model;
  * @author jstroot
  * 
  */
-public interface DataSearchFilter {
+public interface DiskResourceQueryTemplate {
 
     /**
      * creator.username:(here is the content)

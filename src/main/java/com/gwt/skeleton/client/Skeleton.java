@@ -4,7 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import com.gwt.skeleton.client.service.SearchServiceFacade;
-import com.gwt.skeleton.client.view.SearchFormViewImpl;
+import com.gwt.skeleton.client.view.DiskResourceQueryForm;
 import com.gwt.skeleton.client.widget.IplantSearchField;
 import com.sencha.gxt.widget.core.client.Dialog;
 import com.sencha.gxt.widget.core.client.button.TextButton;
@@ -31,7 +31,7 @@ public void onModuleLoad() {
                 dlg.setAutoHide(false);
                 dlg.setSize("400", "800");
                 SearchServiceFacade searchService = null;
-                dlg.add(new SearchFormViewImpl(searchService));
+                dlg.add(new DiskResourceQueryForm(searchService));
                 dlg.show();
 
             }

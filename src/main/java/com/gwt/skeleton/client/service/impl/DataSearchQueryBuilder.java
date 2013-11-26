@@ -3,7 +3,7 @@ package com.gwt.skeleton.client.service.impl;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 
-import com.gwt.skeleton.client.view.model.DataSearchFilter;
+import com.gwt.skeleton.client.view.model.DiskResourceQueryTemplate;
 
 /**
  * This class uses a builder pattern to construct a search query from a given filter.
@@ -21,10 +21,10 @@ import com.gwt.skeleton.client.view.model.DataSearchFilter;
  */
 public class DataSearchQueryBuilder {
 
-    private final DataSearchFilter dsf;
+    private final DiskResourceQueryTemplate dsf;
     private final StringBuilder sb;
 
-    public DataSearchQueryBuilder(DataSearchFilter dsf) {
+    public DataSearchQueryBuilder(DiskResourceQueryTemplate dsf) {
 
         this.dsf = dsf;
         sb = new StringBuilder();
